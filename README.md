@@ -190,9 +190,8 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## 👨‍💻 Author
 
 **Hussein Tantawy**
-- GitHub: [@husseintantawy](https://github.com/husseintantawy)
-- LinkedIn: [Hussein Tantawy](https://linkedin.com/in/husseintantawy)
-- Portfolio: [husseintantawy.dev](https://husseintantawy.dev)
+- GitHub: [@husseintantawy](https://github.com/HTantawy)
+- Portfolio: [husseintantawy.dev](https://husseins-portfolio-website.vercel.app/)
 
 ## 🙏 Acknowledgments
 
