@@ -13,6 +13,7 @@ import Hero from "@/components/Hero";
 import HowItWorks from "@/components/HowItWorks";
 import WhyUseThis from "@/components/WhyUseThis";
 import Footer from "@/components/Footer";
+import Navigation from "@/components/Navigation";
 import CoverLetterOutput from "@/components/CoverLetterOutput";
 import { supabase } from "@/integrations/supabase/client";
 
@@ -92,10 +93,21 @@ const Index = () => {
       setGeneratedLetter(data.coverLetter);
       setShowOutput(true);
       
-      toast({
-        title: "Cover letter generated!",
-        description: "Your personalized cover letter is ready.",
-      });
+      // Show appropriate feedback based on CV analysis
+      if (data.cvAnalysis && !data.cvAnalysis.extractionSuccess) {
+        toast({
+          title: "Cover letter generated!",
+          description: `${data.cvAnalysis.message} The letter has been created using available information.`,
+          variant: "default",
+        });
+      } else {
+        toast({
+          title: "Cover letter generated!",
+          description: data.cvAnalysis 
+            ? `Successfully analyzed your CV (${data.cvAnalysis.wordCount} words) and created a personalized letter.`
+            : "Your personalized cover letter is ready.",
+        });
+      }
 
     } catch (error) {
       console.error('Error:', error);
@@ -110,16 +122,33 @@ const Index = () => {
   };
 
   if (showOutput) {
-    return <CoverLetterOutput letter={generatedLetter} onBack={() => setShowOutput(false)} />;
+    return (
+      <CoverLetterOutput 
+        letter={generatedLetter} 
+        onBack={() => setShowOutput(false)}
+        formData={uploadedFile ? {
+          uploadedFile,
+          jobTitle,
+          company,
+          location,
+          jobDescription,
+          tone,
+          focusAreas,
+          letterLength,
+          industry
+        } : undefined}
+      />
+    );
   }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-purple-50/30 to-cyan-50/50 relative">
       <div className="absolute inset-0 bg-gradient-to-br from-purple-100/20 via-pink-100/20 to-cyan-100/20"></div>
+      <Navigation />
       <Hero />
       
       {/* Main Form Section */}
-      <section className="py-16 px-4 relative z-10">
+      <section id="generate" className="py-16 px-4 relative z-10">
         <div className="max-w-4xl mx-auto">
           <div className="relative">
             <div className="absolute -inset-1 bg-gradient-to-r from-purple-600 via-pink-600 to-blue-600 rounded-3xl blur opacity-20"></div>

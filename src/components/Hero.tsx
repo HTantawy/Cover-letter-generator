@@ -4,31 +4,21 @@ import { ArrowDown } from "lucide-react";
 
 const Hero = () => {
   const scrollToForm = () => {
-    const formSection = document.querySelector('section');
+    const formSection = document.getElementById('generate');
     formSection?.scrollIntoView({ behavior: 'smooth' });
   };
 
   return (
-    <header className="relative overflow-hidden bg-gradient-to-br from-indigo-900 via-purple-900 to-pink-800 text-white">
+    <header id="hero" className="relative overflow-hidden bg-gradient-to-br from-indigo-900 via-purple-900 to-pink-800 text-white">
       <div className="absolute inset-0">
         <div className="absolute inset-0 bg-gradient-to-br from-cyan-400/20 via-violet-400/20 to-fuchsia-400/20"></div>
         <div className="absolute top-0 left-1/4 w-96 h-96 bg-gradient-to-r from-blue-400 to-cyan-400 rounded-full mix-blend-multiply filter blur-xl opacity-30 animate-pulse"></div>
         <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-gradient-to-r from-pink-400 to-purple-400 rounded-full mix-blend-multiply filter blur-xl opacity-30 animate-pulse" style={{animationDelay: '2s'}}></div>
       </div>
       
-      <nav className="relative z-10 flex justify-center items-center px-6 py-8 max-w-7xl mx-auto">
-        <div className="flex items-center space-x-4">
-          <div className="relative">
-            <div className="w-12 h-12 bg-gradient-to-br from-white to-gray-100 rounded-2xl flex items-center justify-center shadow-lg transform rotate-3 hover:rotate-6 transition-transform duration-300">
-              <span className="text-indigo-600 text-2xl transform -rotate-3">✦</span>
-            </div>
-            <div className="absolute -top-1 -right-1 w-4 h-4 bg-gradient-to-r from-pink-400 to-purple-500 rounded-full animate-pulse"></div>
-          </div>
-          <span className="text-3xl font-bold bg-gradient-to-r from-white via-cyan-100 to-purple-100 bg-clip-text text-transparent">Letter Forge</span>
-        </div>
-      </nav>
+     
 
-      <div className="relative z-10 px-6 py-20 text-center max-w-4xl mx-auto">
+      <div className="relative z-10 px-6 pt-32 pb-20 text-center max-w-4xl mx-auto">
         <h1 className="text-5xl md:text-7xl font-bold mb-8 leading-tight tracking-tight">
           <span className="bg-gradient-to-r from-white via-cyan-200 to-white bg-clip-text text-transparent">
             Craft Perfect
@@ -50,8 +40,8 @@ const Hero = () => {
         
         <p className="text-xl md:text-2xl mb-12 text-white/80 max-w-3xl mx-auto leading-relaxed font-light">
           Transform your job applications with AI-powered cover letters that 
-          <span className="text-cyan-300 font-medium">captivate</span> recruiters and 
-          <span className="text-pink-300 font-medium">showcase</span> your unique value.
+          <span className="text-cyan-300 font-medium"> captivate</span> recruiters and 
+          <span className="text-pink-300 font-medium"> showcase</span> your unique value.
         </p>
         
         <div className="relative group">

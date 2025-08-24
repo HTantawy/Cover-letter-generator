@@ -3,16 +3,29 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
-import { ArrowLeft, Copy, Download, RefreshCw, Mail, Edit3 } from "lucide-react";
+import { ArrowLeft, Copy, Download, RefreshCw, Mail, Edit3, Loader2 } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
 
 interface CoverLetterOutputProps {
   letter: string;
   onBack: () => void;
+  formData?: {
+    uploadedFile: File;
+    jobTitle: string;
+    company: string;
+    location: string;
+    jobDescription: string;
+    tone: string;
+    focusAreas: string[];
+    letterLength: string;
+    industry: string;
+  };
 }
 
-const CoverLetterOutput = ({ letter, onBack }: CoverLetterOutputProps) => {
+const CoverLetterOutput = ({ letter, onBack, formData }: CoverLetterOutputProps) => {
   const [editedLetter, setEditedLetter] = useState(letter);
   const [email, setEmail] = useState("");
+  const [isRegenerating, setIsRegenerating] = useState(false);
   const { toast } = useToast();
 
   const handleCopy = async () => {
@@ -46,11 +59,64 @@ const CoverLetterOutput = ({ letter, onBack }: CoverLetterOutputProps) => {
     });
   };
 
-  const handleRegenerate = () => {
-    toast({
-      title: "Feature coming soon",
-      description: "Regeneration feature will be available in the next update.",
-    });
+  const handleRegenerate = async () => {
+    if (!formData) {
+      toast({
+        title: "Cannot regenerate",
+        description: "Original form data is not available. Please go back and generate a new letter.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    setIsRegenerating(true);
+    
+    try {
+      // Create form data for regeneration
+      const regenerateFormData = new FormData();
+      regenerateFormData.append('cv', formData.uploadedFile);
+      regenerateFormData.append('jobTitle', formData.jobTitle);
+      regenerateFormData.append('company', formData.company);
+      regenerateFormData.append('location', formData.location);
+      regenerateFormData.append('jobDescription', formData.jobDescription);
+      regenerateFormData.append('tone', formData.tone);
+      regenerateFormData.append('focusAreas', JSON.stringify(formData.focusAreas));
+      regenerateFormData.append('letterLength', formData.letterLength);
+      regenerateFormData.append('industry', formData.industry);
+      regenerateFormData.append('regenerate', 'true');
+      regenerateFormData.append('previousLetter', editedLetter);
+
+      const { data, error } = await supabase.functions.invoke('generate-cover-letter', {
+        body: regenerateFormData,
+      });
+
+      if (error) {
+        console.error('Error regenerating cover letter:', error);
+        toast({
+          title: "Regeneration failed",
+          description: "Failed to generate a new version. Please try again.",
+          variant: "destructive",
+        });
+        return;
+      }
+
+      setEditedLetter(data.coverLetter);
+      
+      toast({
+        title: "New version generated!",
+        description: "A fresh cover letter has been created with a different approach.",
+      });
+
+    } catch (error) {
+      console.error('Error:', error);
+      toast({
+        title: "Regeneration failed",
+        description: "An unexpected error occurred. Please try again.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsRegenerating(false);
+    }
   };
 
   const handleEmailSend = () => {
@@ -121,11 +187,16 @@ const CoverLetterOutput = ({ letter, onBack }: CoverLetterOutputProps) => {
               <div className="space-y-3">
                 <Button
                   onClick={handleRegenerate}
+                  disabled={isRegenerating || !formData}
                   variant="outline"
                   className="w-full justify-start"
                 >
-                  <RefreshCw className="h-4 w-4 mr-2" />
-                  Regenerate Letter
+                  {isRegenerating ? (
+                    <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+                  ) : (
+                    <RefreshCw className="h-4 w-4 mr-2" />
+                  )}
+                  {isRegenerating ? 'Generating...' : 'Regenerate Letter'}
                 </Button>
                 
                 <Button
@@ -178,6 +249,7 @@ const CoverLetterOutput = ({ letter, onBack }: CoverLetterOutputProps) => {
                 Editing Tips
               </h3>
               <ul className="text-sm text-blue-800 space-y-2">
+                <li>• Click "Regenerate" to create a completely different version</li>
                 <li>• Edit the text directly in the main text area</li>
                 <li>• Copy the final version to your clipboard</li>
                 <li>• Download as a text file for later use</li>

@@ -6,34 +6,30 @@ const HowItWorks = () => {
       icon: Upload,
       title: "Upload CV",
       description: "Simply drag and drop your PDF resume or CV to get started",
-      emoji: "📄",
       gradient: "from-purple-500 to-pink-500"
     },
     {
       icon: FileText,
       title: "Add Job Info",
       description: "Paste the job description and customize the tone to match your style",
-      emoji: "📋",
       gradient: "from-cyan-500 to-blue-500"
     },
     {
       icon: Sparkles,
       title: "Generate Letter",
       description: "Our AI analyzes your CV and creates a personalized cover letter",
-      emoji: "✨",
       gradient: "from-pink-500 to-orange-500"
     },
     {
       icon: Edit3,
       title: "Refine & Polish",
       description: "Edit any part instantly with our intelligent refinement tools",
-      emoji: "🎨",
       gradient: "from-green-500 to-emerald-500"
     },
   ];
 
   return (
-    <section className="py-24 px-4 bg-gradient-to-br from-slate-50 via-purple-50/30 to-cyan-50/50 relative overflow-hidden">
+    <section id="how-it-works" className="py-24 px-4 bg-gradient-to-br from-slate-50 via-purple-50/30 to-cyan-50/50 relative overflow-hidden">
       {/* Background Elements */}
       <div className="absolute inset-0">
         <div className="absolute top-20 left-10 w-72 h-72 bg-gradient-to-r from-purple-300 to-pink-300 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse"></div>
@@ -74,11 +70,6 @@ const HowItWorks = () => {
                     <div className="absolute -top-2 -right-2 w-8 h-8 bg-gradient-to-r from-pink-400 to-purple-500 rounded-full flex items-center justify-center animate-pulse">
                       <span className="text-white font-bold text-sm">{index + 1}</span>
                     </div>
-                  </div>
-                  
-                  {/* Floating Emoji */}
-                  <div className="absolute -top-3 -left-3 text-2xl transform group-hover:scale-125 group-hover:rotate-12 transition-all duration-300">
-                    {step.emoji}
                   </div>
                 </div>
                 

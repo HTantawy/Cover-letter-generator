@@ -19,7 +19,7 @@ const Footer = () => {
               <div className="relative bg-white/10 backdrop-blur-lg rounded-3xl p-12 border border-white/20">
                 <div className="text-7xl mb-6">✨</div>
                 <h3 className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-white via-cyan-200 to-purple-200 bg-clip-text text-transparent">
-                  Transform Your Career Today
+                  Ready to land your dream job
                 </h3>
                 <p className="text-2xl mb-10 text-white/80 max-w-3xl mx-auto leading-relaxed">
                   Join the thousands who've already upgraded their job search with AI-powered cover letters
@@ -69,7 +69,7 @@ const Footer = () => {
                     </div>
                     <div className="absolute -top-1 -right-1 w-4 h-4 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-full animate-pulse"></div>
                   </div>
-                  <span className="text-3xl font-bold bg-gradient-to-r from-white via-cyan-200 to-purple-200 bg-clip-text text-transparent">Letter Forge</span>
+                  <span className="text-3xl font-bold bg-gradient-to-r from-white via-cyan-200 to-purple-200 bg-clip-text text-transparent">Coverly</span>
                 </div>
                 <p className="text-white/70 mb-6 max-w-md leading-relaxed">
                   The most advanced AI-powered cover letter generator. Create professional, personalized letters that get you hired.
@@ -77,7 +77,6 @@ const Footer = () => {
                 <div className="flex items-center space-x-2 text-white/60 text-sm">
                   <span>Built with</span>
                   <Heart className="h-4 w-4 text-red-400 animate-pulse" />
-                  <span>using cutting-edge AI</span>
                 </div>
               </div>
 
@@ -137,7 +136,7 @@ const Footer = () => {
             <div className="border-t border-white/10 mt-16 pt-8 text-center">
               <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
                 <p className="text-white/60 text-sm">
-                  &copy; 2024 Letter Forge. Crafted with passion for your success.
+                  &copy; 2025 Coverly. Crafted with passion for your success.
                 </p>
                 <div className="flex items-center space-x-6 text-white/60 text-sm">
                   <span className="flex items-center">
