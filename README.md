@@ -2,7 +2,7 @@
 
 > Transform your job applications with intelligent, personalized cover letters that get you hired faster.
 
-![Coverly Screenshot](https://via.placeholder.com/800x400/6366f1/white?text=Coverly+Cover+Letter+Generator)
+![Coverly Screenshot](./public/git.png)
 
 ## 🚀 Features
 
